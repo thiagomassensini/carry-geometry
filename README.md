@@ -6,21 +6,21 @@ The library introduces no carry axiom. Its object of departure is the ordinary
 finite positional representation of natural numbers in a base `b > 1`. Carry
 propagation is then derived from powers, Euclidean quotient and remainder:
 
-\[
+$$
 \mathbb N
 \longrightarrow b^k
 \longrightarrow n=(n\bmod b^k)+b^k\lfloor n/b^k\rfloor
 \longrightarrow \text{saturation}
 \longrightarrow \text{carry}.
-\]
+$$
 
 In particular, Lean checks
 
-\[
+$$
 (n+1)\equiv0\pmod{b^k}
 \quad\Longleftrightarrow\quad
 n\equiv b^k-1\pmod{b^k}.
-\]
+$$
 
 Thus adding one carries through the lowest `k` positions exactly when that
 block was saturated. The primitive computation `(b^k - 1) + 1 = b^k` resets
@@ -31,22 +31,22 @@ the lower residue to zero and transfers exactly one unit to the quotient.
 A raw coefficient list may contain arbitrary natural coefficients and still
 represent a valid value
 
-\[
+$$
 \sum_j a_jb^j.
-\]
+$$
 
 It is not necessarily a finite-alphabet base-`b` numeral. For every raw
 coefficient `a`, Lean proves that the only bounded value-preserving split is
 
-\[
+$$
 a=(a\bmod b)+b\lfloor a/b\rfloor.
-\]
+$$
 
 At position `j`, this becomes
 
-\[
+$$
 a b^j=(a\bmod b)b^j+\lfloor a/b\rfloor b^{j+1}.
-\]
+$$
 
 Thus `a % b` is the restored digit and `a / b` is the forced carry. The
 library also proves that the finite digit alphabet is not closed under raw
@@ -70,19 +70,19 @@ Every residual class is equiprobable, so the carry-producing class has mass
 `b⁻ᵏ`. For every base `b > 1`, positive depth `k`, and real exponent `sigma`,
 the library proves
 
-\[
+$$
 P_b(\{a\})=b^{-k},
 \qquad
 \bigl(b^{-k/2}\bigr)^2=b^{-k},
-\]
+$$
 
 and
 
-\[
+$$
 \bigl(b^{-k\sigma}\bigr)^2=b^{-k}
 \quad\Longleftrightarrow\quad
 \sigma=\frac12.
-\]
+$$
 
 Consequently, the globally compatible exponent is unique and independent of
 the positional base. No primality assumption is used.
@@ -122,3 +122,10 @@ The foundational laws were distilled from
 [`native-carry-geometry`](https://github.com/thiagomassensini/native-carry-geometry)
 and retain its Apache-2.0 licensing. The present repository packages the
 minimal dependency chain and closes the arbitrary-residue-class formulation.
+
+## Citation and archival
+
+Versioned citation metadata is provided in [`CITATION.cff`](CITATION.cff).
+Zenodo-specific release metadata is provided in [`.zenodo.json`](.zenodo.json),
+which is authoritative for Zenodo ingestion. Tagged GitHub releases are
+archived through the repository's active Zenodo integration.

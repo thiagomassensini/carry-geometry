@@ -14,49 +14,49 @@ kernel axiom.
 
 The formal dependency chain is
 
-\[
+$$
 \text{Lean type theory}
 \to \mathbb N
 \to +,\times,\operatorname{pow},\operatorname{div},\operatorname{mod}
 \to \text{positional decomposition}
 \to \text{saturation and carry}.
-\]
+$$
 
 The module `CarryGeometry.PositionalFoundation` defines
 
-\[
+$$
 q_k(n)=\left\lfloor\frac{n}{b^k}\right\rfloor,
 \qquad
 r_k(n)=n\bmod b^k,
-\]
+$$
 
 and proves the unique decomposition
 
-\[
+$$
 n=r_k(n)+b^kq_k(n),\qquad 0\le r_k(n)<b^k.
-\]
+$$
 
 It then defines saturation of the lowest `k` positions by
 
-\[
+$$
 r_k(n)=b^k-1
-\]
+$$
 
 and proves, rather than assumes,
 
-\[
+$$
 r_k(n)=b^k-1
 \quad\Longleftrightarrow\quad
 r_k(n+1)=0
 \quad\Longleftrightarrow\quad
 b^k\mid n+1.
-\]
+$$
 
 The explicit saturated block satisfies
 
-\[
+$$
 (b^k-1)+1=b^k,
-\]
+$$
 
 whose quotient is one and residue is zero. This is the formal version of “a
 saturated positional block transfers one unit to the next place.”
@@ -71,27 +71,27 @@ relevant to subtraction, but is not needed or claimed by the present theorem.
 
 For `b > 0`, every coefficient has the Euclidean decomposition
 
-\[
+$$
 a=(a\bmod b)+b\left\lfloor a/b\right\rfloor.
-\]
+$$
 
 The library proves this is the unique decomposition whose first term lies in
 the digit alphabet. After weighting the coefficient by position `j`, the same
 identity is
 
-\[
-a b^j=(a\bmod b)b^j+left\lfloor a/b\right\rfloor b^{j+1}.
-\]
+$$
+a b^j=(a\bmod b)b^j+\left\lfloor a/b\right\rfloor b^{j+1}.
+$$
 
 Therefore normalization does not change value. It redistributes exactly the
 part that cannot remain in the finite state space of the current position.
 Moreover,
 
-\[
+$$
 a<b\iff\left\lfloor a/b\right\rfloor=0,
 \qquad
 b\le a\iff0<\left\lfloor a/b\right\rfloor.
-\]
+$$
 
 The theorem `finiteAlphabetNormalization_forced` packages existence,
 admissibility, overflow, and uniqueness. The word “forced” refers to this
@@ -108,9 +108,9 @@ and the sexagesimal examples.
 
 For `b > 1`, the repository proves
 
-\[
+$$
 \#\{\text{admissible strings of length }k\}=b^k
-\]
+$$
 
 and that positional evaluation bijects these strings with `[0,b^k)`. This
 identifies the `Fin (b ^ k)` probability space with the actual finite digit
@@ -126,16 +126,16 @@ finite per-position alphabet require redistribution between scales.
 For a natural base `b`, depth `k`, and real exponent `sigma`, the public API
 uses
 
-\[
+$$
 \operatorname{carryMass}(b,k)=b^{-k},\qquad
 \operatorname{carryAmplitude}(b,k)=b^{-k/2},
-\]
+$$
 
 and
 
-\[
+$$
 \operatorname{deformedAmplitude}(b,\sigma,k)=b^{-k\sigma}.
-\]
+$$
 
 At depth `k`, the residual space is `Fin (b ^ k)`. Every specified class is a
 singleton, so its finite uniform probability is `b^{-k}` independently of the
@@ -144,11 +144,11 @@ the event characterized arithmetically as producing carry after adding one.
 
 For `b > 1` and `k > 0`, quadratic compatibility is rigid:
 
-\[
+$$
 \operatorname{deformedAmplitude}(b,\sigma,k)^2=b^{-k}
 \quad\Longleftrightarrow\quad
 \sigma=\frac12.
-\]
+$$
 
 The same normal form proves that the global compatibility locus is identical
 for every genuine positional base.

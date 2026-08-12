@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this formalization, please cite the versioned software release."
+title: "Carry Geometry"
+type: software
+authors:
+  - family-names: Massensini
+    given-names: Thiago
+repository-code: "https://github.com/thiagomassensini/carry-geometry"
+url: "https://github.com/thiagomassensini/carry-geometry"
+license: Apache-2.0
+version: 0.1.0
+date-released: 2026-08-12
+abstract: >-
+  A Lean 4 formalization of the positional foundation of carry geometry,
+  including unique quotient-remainder decomposition, forced finite-alphabet
+  normalization, arithmetic carry propagation, uniform carry probability,
+  quadratic amplitude rigidity, and base independence.
+keywords:
+  - Lean 4
+  - formalized mathematics
+  - positional representation
+  - carry geometry
+  - finite alphabet
+  - Euclidean normalization
+  - quadratic amplitude
+  - base independence
+  - reproducible proof audit

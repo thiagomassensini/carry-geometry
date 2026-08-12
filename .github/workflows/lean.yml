@@ -30,6 +30,15 @@ jobs:
             exit 1
           fi
 
+      - name: Validate publication metadata and GitHub Markdown
+        run: |
+          python3 -m json.tool .zenodo.json >/dev/null
+          if rg -n '^\\\[|^\\\]$|\\\(|\\\)' --glob '*.md'; then
+            exit 1
+          fi
+          test "$(rg -c '^\$\$$' --glob '*.md' | awk -F: '{n += $2} END {print n + 0}')" -gt 0
+          test "$(( $(rg -c '^\$\$$' --glob '*.md' | awk -F: '{n += $2} END {print n + 0}') % 2 ))" -eq 0
+
       - name: Set up Lean and Mathlib cache
         uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1.5.0
         with:

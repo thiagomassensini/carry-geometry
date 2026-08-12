@@ -5,29 +5,29 @@
 Let `b > 0` and let `a` be a raw coefficient attached to position `j`. The
 coefficient is algebraically meaningful without any bound:
 
-\[
+$$
 a b^j.
-\]
+$$
 
 To make the coefficient an admissible digit, require a decomposition
 
-\[
+$$
 a=d+bq,\qquad 0\le d<b.
-\]
+$$
 
 Euclidean division proves that this decomposition exists and is unique:
 
-\[
-d=a\bmod b,qquad q=\left\lfloor a/b\right\rfloor.
-\]
+$$
+d=a\bmod b,\qquad q=\left\lfloor a/b\right\rfloor.
+$$
 
 Multiplying the decomposition by the positional weight gives
 
-\[
+$$
 a b^j
 =(a\bmod b)b^j
 +\left\lfloor a/b\right\rfloor b^{j+1}.
-\]
+$$
 
 The second term is carry. It is not an implementation convention: among all
 splits that preserve value and return the current coefficient to
@@ -44,10 +44,10 @@ The Lean theorem `finiteAlphabetNormalization_forced` packages:
 
 A raw expansion is a finite coefficient list interpreted as
 
-\[
+$$
 \operatorname{value}_b(a_0,\ldots,a_m)
 =\sum_{j=0}^{m}a_jb^j.
-\]
+$$
 
 The coefficients need not be less than `b`. This remains valid algebra, but
 it is not necessarily a numeral over the finite alphabet.
@@ -55,10 +55,10 @@ it is not necessarily a numeral over the finite alphabet.
 `normalizeCoefficients` evaluates the raw expansion and returns the canonical
 base-`b` digit list. Lean proves:
 
-\[
+$$
 \operatorname{value}_b(\operatorname{normalize}_b A)
 =\operatorname{value}_b(A),
-\]
+$$
 
 and, for `b > 1`, every coefficient in the output is below `b`. An already
 canonical list with no leading zero is unchanged.
@@ -87,9 +87,9 @@ Thus the structural alternative is exact:
 
 For `b > 1`, `admissibleDigitStrings b hb k` contains exactly
 
-\[
+$$
 b^k
-\]
+$$
 
 strings. Positional evaluation is a bijection between those length-`k`
 strings and the natural interval `[0,b^k)`. This connects the finite alphabet
@@ -104,25 +104,25 @@ Lean stores coefficient lists from least to most significant.
 
 ### Addition
 
-\[
+$$
 59+2=61=1+1\cdot60.
-\]
+$$
 
 Internal list: `[1, 1]`; conventional notation: `[1,1]₆₀`.
 
 ### Multiplication
 
-\[
+$$
 59^2=3481=1+58\cdot60.
-\]
+$$
 
 Internal list: `[1, 58]`; conventional notation: `[58,1]₆₀`.
 
 ### Power
 
-\[
+$$
 59^3=205379=59+2\cdot60+57\cdot60^2.
-\]
+$$
 
 Internal list: `[59, 2, 57]`; conventional notation: `[57,2,59]₆₀`.
 
