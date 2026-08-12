@@ -1,0 +1,10 @@
+Carry Geometry
+
+The foundational scalar definitions and quadratic-rigidity arguments in this
+work were distilled from Native Carry Geometry, revision
+01a536beaa9a045fdf91b511315ab309008ff602 (tag v0.4.0):
+
+  https://github.com/thiagomassensini/native-carry-geometry
+
+Native Carry Geometry is distributed under the Apache License, Version 2.0.
+The present work retains that license and records the source relationship here.

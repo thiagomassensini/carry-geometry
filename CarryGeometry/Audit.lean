@@ -1,0 +1,38 @@
+import CarryGeometry
+
+/-!
+# Kernel audit surface
+
+These commands expose the axioms used by every foundational public result.
+-/
+
+#print axioms CarryGeometry.carryAmplitude_sq_eq_carryMass
+#print axioms CarryGeometry.positionalDecompositionAtDepth_existsUnique
+#print axioms CarryGeometry.increment_carries_iff_lowerPositionsSaturated
+#print axioms CarryGeometry.carryAfterIncrementAtDepth_iff_placeValue_dvd
+#print axioms CarryGeometry.firstCarryDepth_iff_divisible_not_next
+#print axioms CarryGeometry.saturatedBlock_increment_resets_and_carries_one
+#print axioms CarryGeometry.coefficient_normalization_unique
+#print axioms CarryGeometry.weighted_coefficient_normalization
+#print axioms CarryGeometry.finiteDigitAlphabet_not_closed_under_raw_addition
+#print axioms CarryGeometry.finiteDigitAlphabet_not_closed_under_raw_multiplication
+#print axioms CarryGeometry.rawExpansionValue_eq_weightedSum
+#print axioms CarryGeometry.normalizeCoefficients_preserves_value
+#print axioms CarryGeometry.normalizeCoefficients_digits_admissible
+#print axioms CarryGeometry.normalizeCoefficients_no_leading_zero
+#print axioms CarryGeometry.card_admissibleDigitStrings
+#print axioms CarryGeometry.eval_bijects_admissibleDigitStrings_and_residues
+#print axioms CarryGeometry.finiteAlphabetNormalization_forced
+#print axioms CarryGeometry.residueClassEvent_probability
+#print axioms CarryGeometry.residueClass_probability_independent
+#print axioms CarryGeometry.canonicalCarryEvent_probability
+#print axioms CarryGeometry.carryAfterIncrementAtDepth_iff_residue_eq_incrementCarryClass
+#print axioms CarryGeometry.incrementCarryEvent_probability
+#print axioms CarryGeometry.deformedAmplitude_sq_eq_carryMass_iff
+#print axioms CarryGeometry.positionalMassCompatible_iff
+#print axioms CarryGeometry.positionalMassCompatible_base_independent
+#print axioms CarryGeometry.zeroDepth_quadratic_compatible
+#print axioms CarryGeometry.baseOne_quadratic_compatible
+#print axioms CarryGeometry.positionalMassCompatible_base_one
+#print axioms CarryGeometry.positionalCarryUniversality
+#print axioms CarryGeometry.arithmeticCarryUniversality
