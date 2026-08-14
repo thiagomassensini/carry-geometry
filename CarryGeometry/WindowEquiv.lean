@@ -1,4 +1,5 @@
 import CarryGeometry.Normalization
+import Mathlib.Data.Fin.Embedding
 
 /-!
 # Finite positional windows as exact equivalences
@@ -10,6 +11,10 @@ define exact coordinate changes between windows of equal cardinality.
 
 No equality of cardinalities is manufactured: a finite camera change is an
 equivalence only when the two place values are equal.
+
+When the source window has no more states than the target, the same residue
+coordinate gives a canonical value-preserving embedding.  At strict
+inequality this map is proved not to be surjective.
 -/
 
 namespace CarryGeometry
@@ -107,6 +112,90 @@ theorem matchedCameraEquiv_trans
         (matchedCameraEquiv b c hb hc k l hcard digits) = digits := by
   rw [← matchedCameraEquiv_symm b c hb hc k l hcard]
   exact (matchedCameraEquiv b c hb hc k l hcard).symm_apply_apply digits
+
+/-! ## One-sided transport between windows of unequal cardinality -/
+
+/--
+Canonical value-preserving embedding of a finite positional window into a
+window with at least as many residual states.
+-/
+def cameraEmbedding
+    (b c : ℕ) (hb : 1 < b) (hc : 1 < c) (k l : ℕ)
+    (hcard : placeValue b k ≤ placeValue c l) :
+    DigitWindow b hb k ↪ DigitWindow c hc l :=
+  (digitWindowResidueEquiv b hb k).toEmbedding.trans
+    ((Fin.castLEEmb hcard).trans
+      (digitWindowResidueEquiv c hc l).symm.toEmbedding)
+
+/-- The camera embedding is the ordinary inclusion in residual coordinates. -/
+theorem digitWindowResidueEquiv_cameraEmbedding
+    (b c : ℕ) (hb : 1 < b) (hc : 1 < c) (k l : ℕ)
+    (hcard : placeValue b k ≤ placeValue c l)
+    (digits : DigitWindow b hb k) :
+    digitWindowResidueEquiv c hc l
+        (cameraEmbedding b c hb hc k l hcard digits) =
+      Fin.castLE hcard (digitWindowResidueEquiv b hb k digits) := by
+  simp [cameraEmbedding]
+
+/-- A one-sided camera embedding preserves the represented natural number. -/
+@[simp] theorem cameraEmbedding_preserves_value
+    (b c : ℕ) (hb : 1 < b) (hc : 1 < c) (k l : ℕ)
+    (hcard : placeValue b k ≤ placeValue c l)
+    (digits : DigitWindow b hb k) :
+    rawExpansionValue c (cameraEmbedding b c hb hc k l hcard digits).1 =
+      rawExpansionValue b digits.1 := by
+  rw [← digitWindowResidueEquiv_apply_val b hb k digits,
+    ← digitWindowResidueEquiv_apply_val c hc l
+      (cameraEmbedding b c hb hc k l hcard digits)]
+  exact congrArg Fin.val
+    (digitWindowResidueEquiv_cameraEmbedding b c hb hc k l hcard digits)
+
+/-- Camera embeddings compose coherently through an intermediate window. -/
+theorem cameraEmbedding_trans
+    (b c d : ℕ) (hb : 1 < b) (hc : 1 < c) (hd : 1 < d)
+    (k l m : ℕ)
+    (hbc : placeValue b k ≤ placeValue c l)
+    (hcd : placeValue c l ≤ placeValue d m) :
+    (cameraEmbedding b c hb hc k l hbc).trans
+        (cameraEmbedding c d hc hd l m hcd) =
+      cameraEmbedding b d hb hd k m (hbc.trans hcd) := by
+  ext digits
+  apply (digitWindowResidueEquiv d hd m).injective
+  apply Fin.ext
+  simp [cameraEmbedding]
+
+/-- At equal cardinality, the embedding is exactly the matched equivalence. -/
+theorem cameraEmbedding_eq_matchedCameraEquiv_toEmbedding
+    (b c : ℕ) (hb : 1 < b) (hc : 1 < c) (k l : ℕ)
+    (hcard : placeValue b k = placeValue c l) :
+    cameraEmbedding b c hb hc k l hcard.le =
+      (matchedCameraEquiv b c hb hc k l hcard).toEmbedding := by
+  ext digits
+  apply (digitWindowResidueEquiv c hc l).injective
+  apply Fin.ext
+  simp [cameraEmbedding, matchedCameraEquiv]
+
+/--
+If the target has strictly more residual states, the canonical camera
+embedding is not surjective.  Thus the one-sided construction cannot be
+silently promoted to an equivalence.
+-/
+theorem cameraEmbedding_not_surjective
+    (b c : ℕ) (hb : 1 < b) (hc : 1 < c) (k l : ℕ)
+    (hcard : placeValue b k < placeValue c l) :
+    ¬ Function.Surjective (cameraEmbedding b c hb hc k l hcard.le) := by
+  intro hsurj
+  let missingResidue : Fin (placeValue c l) :=
+    ⟨placeValue b k, hcard⟩
+  let missingDigits : DigitWindow c hc l :=
+    (digitWindowResidueEquiv c hc l).symm missingResidue
+  obtain ⟨digits, hdigits⟩ := hsurj missingDigits
+  have hresidue := congrArg (digitWindowResidueEquiv c hc l) hdigits
+  have hval := congrArg Fin.val hresidue
+  have himpossible :
+      (digitWindowResidueEquiv b hb k digits).val = placeValue b k := by
+    simpa [missingDigits, missingResidue, cameraEmbedding] using hval
+  exact (digitWindowResidueEquiv b hb k digits).isLt.ne himpossible
 
 end
 

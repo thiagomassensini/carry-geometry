@@ -118,6 +118,22 @@ This gives kernel-checked preservation of compressed quadratic energy and of
 the compressed centered three-point bracket. The definitions and proofs are
 in `CarryGeometry.WindowEquiv` and `CarryGeometry.WeightedTransform`.
 
+For unequal windows the API follows the cardinality order instead of
+inventing an inverse. If $b^k\le c^\ell$, it constructs the canonical
+value-preserving embedding
+
+$$
+\operatorname{DigitWindow}(b,k)\hookrightarrow
+\operatorname{DigitWindow}(c,\ell).
+$$
+
+Signals are pushed forward by extension by zero. The compression-weighted
+pushforward preserves compressed quadratic energy, and its reverse recovers
+the source exactly. In the other order the composite is the idempotent
+projection onto the embedded image. When $b^k<c^\ell$, the coordinate
+embedding is proved non-surjective, making the absence of a global inverse a
+kernel-checked theorem rather than a convention.
+
 The public consolidation results are:
 
 - `CarryGeometry.positionalCarryUniversality`, parametrized by an arbitrary

@@ -42,6 +42,10 @@ These commands expose the axioms used by every foundational public result.
 #print axioms CarryGeometry.matchedCameraEquiv_symm
 #print axioms CarryGeometry.matchedCameraEquiv_trans
 #print axioms CarryGeometry.matchedCameraEquiv_roundTrip
+#print axioms CarryGeometry.cameraEmbedding_preserves_value
+#print axioms CarryGeometry.cameraEmbedding_trans
+#print axioms CarryGeometry.cameraEmbedding_eq_matchedCameraEquiv_toEmbedding
+#print axioms CarryGeometry.cameraEmbedding_not_surjective
 #print axioms CarryGeometry.weightedCameraTransform_intertwines
 #print axioms CarryGeometry.weightedCameraTransform_roundTrip
 #print axioms CarryGeometry.weightedCameraTransform_trans
@@ -50,3 +54,15 @@ These commands expose the axioms used by every foundational public result.
 #print axioms CarryGeometry.weightedCameraTransform_preserves_compressedBracket
 #print axioms CarryGeometry.matchedWeightedCameraTransform_preserves_compressedEnergy
 #print axioms CarryGeometry.matchedWeightedCameraTransform_preserves_compressedBracket
+#print axioms CarryGeometry.restrictSignal_pushforwardSignal
+#print axioms CarryGeometry.imageProjection_idempotent
+#print axioms CarryGeometry.weightedEmbeddingTransform_intertwines
+#print axioms CarryGeometry.weightedEmbeddingRetract_intertwines
+#print axioms CarryGeometry.weightedEmbeddingRetract_transform
+#print axioms CarryGeometry.weightedEmbeddingTransform_retract
+#print axioms CarryGeometry.signalEnergy_pushforward
+#print axioms CarryGeometry.weightedEmbeddingTransform_preserves_compressedEnergy
+#print axioms CarryGeometry.weightedEmbeddingTransform_preserves_compressedBracket
+#print axioms CarryGeometry.embeddedWeightedCameraTransform_preserves_compressedEnergy
+#print axioms CarryGeometry.embeddedWeightedCameraRetract_transform
+#print axioms CarryGeometry.embeddedWeightedCameraTransform_retract

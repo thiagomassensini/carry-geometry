@@ -121,6 +121,14 @@ genuine base. For `b > 2`, it is also not closed under unnormalized
 multiplication. Addition alone already proves that arithmetic closure and a
 finite per-position alphabet require redistribution between scales.
 
+When two windows have different state counts, the smaller residual interval
+embeds canonically in the larger one. The corresponding signal map is
+extension by zero, conjugated by the two compression amplitudes. Its reverse
+is a left inverse, while the opposite composite is projection onto the image.
+Strict cardinality inequality implies that the coordinate embedding is not
+surjective. Consequently the unequal-window API has the exact finite
+partial-isometry behavior without asserting a nonexistent equivalence.
+
 ## Mathematical content
 
 For a natural base `b`, depth `k`, and real exponent `sigma`, the public API
