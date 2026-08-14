@@ -4,6 +4,8 @@ import CarryGeometry.Mass
 import CarryGeometry.Probability
 import CarryGeometry.QuadraticAmplitude
 import CarryGeometry.Universality
+import CarryGeometry.WindowEquiv
+import CarryGeometry.WeightedTransform
 
 /-!
 # Carry Geometry

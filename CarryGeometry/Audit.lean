@@ -7,6 +7,7 @@ These commands expose the axioms used by every foundational public result.
 -/
 
 #print axioms CarryGeometry.carryAmplitude_sq_eq_carryMass
+#print axioms CarryGeometry.carryAmplitude_pos
 #print axioms CarryGeometry.positionalDecompositionAtDepth_existsUnique
 #print axioms CarryGeometry.increment_carries_iff_lowerPositionsSaturated
 #print axioms CarryGeometry.carryAfterIncrementAtDepth_iff_placeValue_dvd
@@ -36,3 +37,32 @@ These commands expose the axioms used by every foundational public result.
 #print axioms CarryGeometry.positionalMassCompatible_base_one
 #print axioms CarryGeometry.positionalCarryUniversality
 #print axioms CarryGeometry.arithmeticCarryUniversality
+#print axioms CarryGeometry.digitWindowResidueEquiv_apply_val
+#print axioms CarryGeometry.matchedCameraEquiv_preserves_value
+#print axioms CarryGeometry.matchedCameraEquiv_symm
+#print axioms CarryGeometry.matchedCameraEquiv_trans
+#print axioms CarryGeometry.matchedCameraEquiv_roundTrip
+#print axioms CarryGeometry.cameraEmbedding_preserves_value
+#print axioms CarryGeometry.cameraEmbedding_trans
+#print axioms CarryGeometry.cameraEmbedding_eq_matchedCameraEquiv_toEmbedding
+#print axioms CarryGeometry.cameraEmbedding_not_surjective
+#print axioms CarryGeometry.weightedCameraTransform_intertwines
+#print axioms CarryGeometry.weightedCameraTransform_roundTrip
+#print axioms CarryGeometry.weightedCameraTransform_trans
+#print axioms CarryGeometry.signalEnergy_reindex
+#print axioms CarryGeometry.weightedCameraTransform_preserves_compressedEnergy
+#print axioms CarryGeometry.weightedCameraTransform_preserves_compressedBracket
+#print axioms CarryGeometry.matchedWeightedCameraTransform_preserves_compressedEnergy
+#print axioms CarryGeometry.matchedWeightedCameraTransform_preserves_compressedBracket
+#print axioms CarryGeometry.restrictSignal_pushforwardSignal
+#print axioms CarryGeometry.imageProjection_idempotent
+#print axioms CarryGeometry.weightedEmbeddingTransform_intertwines
+#print axioms CarryGeometry.weightedEmbeddingRetract_intertwines
+#print axioms CarryGeometry.weightedEmbeddingRetract_transform
+#print axioms CarryGeometry.weightedEmbeddingTransform_retract
+#print axioms CarryGeometry.signalEnergy_pushforward
+#print axioms CarryGeometry.weightedEmbeddingTransform_preserves_compressedEnergy
+#print axioms CarryGeometry.weightedEmbeddingTransform_preserves_compressedBracket
+#print axioms CarryGeometry.embeddedWeightedCameraTransform_preserves_compressedEnergy
+#print axioms CarryGeometry.embeddedWeightedCameraRetract_transform
+#print axioms CarryGeometry.embeddedWeightedCameraTransform_retract

@@ -121,6 +121,14 @@ genuine base. For `b > 2`, it is also not closed under unnormalized
 multiplication. Addition alone already proves that arithmetic closure and a
 finite per-position alphabet require redistribution between scales.
 
+When two windows have different state counts, the smaller residual interval
+embeds canonically in the larger one. The corresponding signal map is
+extension by zero, conjugated by the two compression amplitudes. Its reverse
+is a left inverse, while the opposite composite is projection onto the image.
+Strict cardinality inequality implies that the coordinate embedding is not
+surjective. Consequently the unequal-window API has the exact finite
+partial-isometry behavior without asserting a nonexistent equivalence.
+
 ## Mathematical content
 
 For a natural base `b`, depth `k`, and real exponent `sigma`, the public API
@@ -185,6 +193,14 @@ as one of:
 2. application of the kernel;
 3. bridge to another formalization;
 4. genuinely new mathematical structure.
+
+`CarryGeometry.WindowEquiv` and `CarryGeometry.WeightedTransform` are in the
+fourth class and are kept outside the dependency chain of the positional
+foundation itself. They package the established finite evaluation bijection,
+define matched-window camera changes only under an explicit equality of state
+counts, and conjugate reindexing by the already established quadratic
+amplitudes. They do not assert a finite equivalence for unequal state counts
+or a global all-bases orthogonality theorem.
 
 Green identities, Weyl operators, primes, zeta functions, spectral operators,
 and analytic continuation are deliberately outside this repository.
