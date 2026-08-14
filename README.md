@@ -1,6 +1,7 @@
 # Carry Geometry
 
-Minimal Lean formalization of the **positional foundation** of carry geometry.
+Lean formalization of the **positional foundation** and finite camera
+transport of carry geometry.
 
 The library introduces no carry axiom. Its object of departure is the ordinary
 finite positional representation of natural numbers in a base `b > 1`. Carry

@@ -1,11 +1,11 @@
 {
   "title": "Carry Geometry",
-  "description": "Lean 4 formalization of the positional foundation of carry geometry: unique quotient-remainder decomposition, forced finite-alphabet normalization, arithmetic carry propagation, uniform carry probability, quadratic amplitude rigidity, and base independence.",
+  "description": "Lean 4 formalization of the positional foundation and finite camera transport of carry geometry: unique quotient-remainder decomposition, forced finite-alphabet normalization, arithmetic carry propagation, uniform carry probability, quadratic amplitude rigidity, base independence, exact matched-window equivalences, and one-sided value-preserving embeddings with compression-weighted signal transport.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
-  "version": "0.1.0",
-  "publication_date": "2026-08-12",
+  "version": "0.2.0",
+  "publication_date": "2026-08-14",
   "language": "eng",
   "creators": [
     {
@@ -21,6 +21,9 @@
     "Euclidean normalization",
     "quadratic amplitude",
     "base independence",
+    "finite camera transport",
+    "coordinate embedding",
+    "partial isometry",
     "reproducible proof audit"
   ],
   "related_identifiers": [
