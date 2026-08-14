@@ -186,6 +186,14 @@ as one of:
 3. bridge to another formalization;
 4. genuinely new mathematical structure.
 
+`CarryGeometry.WindowEquiv` and `CarryGeometry.WeightedTransform` are in the
+fourth class and are kept outside the dependency chain of the positional
+foundation itself. They package the established finite evaluation bijection,
+define matched-window camera changes only under an explicit equality of state
+counts, and conjugate reindexing by the already established quadratic
+amplitudes. They do not assert a finite equivalence for unequal state counts
+or a global all-bases orthogonality theorem.
+
 Green identities, Weyl operators, primes, zeta functions, spectral operators,
 and analytic continuation are deliberately outside this repository.
 

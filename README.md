@@ -87,6 +87,37 @@ $$
 Consequently, the globally compatible exponent is unique and independent of
 the positional base. No primality assumption is used.
 
+## Exact finite camera transport
+
+The evaluation bijection is exposed as
+
+$$
+\operatorname{DigitWindow}(b,k)\simeq\operatorname{Fin}(b^k).
+$$
+
+Consequently, two finite camera windows admit an exact coordinate change when
+their state counts agree, $b^k=c^\ell$. The resulting equivalence preserves
+the represented natural number, its reverse is the opposite camera change,
+and changes compose coherently through intermediate cameras.
+
+The API deliberately does not manufacture a bijection when $b^k\ne c^\ell$.
+For matched windows it also defines the compression-weighted transform
+
+$$
+T_{b,k\to c,\ell}=C_{c,\ell}^{-1}PC_{b,k},
+\qquad C_{b,k}x=b^{-k/2}x,
+$$
+
+and proves the exact intertwining identity
+
+$$
+C_{c,\ell}T_{b,k\to c,\ell}=PC_{b,k}.
+$$
+
+This gives kernel-checked preservation of compressed quadratic energy and of
+the compressed centered three-point bracket. The definitions and proofs are
+in `CarryGeometry.WindowEquiv` and `CarryGeometry.WeightedTransform`.
+
 The public consolidation results are:
 
 - `CarryGeometry.positionalCarryUniversality`, parametrized by an arbitrary
@@ -99,10 +130,12 @@ zero and base one cannot determine the exponent.
 
 ## Scope
 
-This is a foundational arithmetic and scalar kernel. It intentionally contains no Green or
-Weyl machinery, primes, zeta functions, spectral operators, or analytic
-continuation. See [the foundational-core note](docs/FOUNDATIONAL_CORE.md) for
-the mathematical contract, and [the forced-normalization note](docs/FORCED_NORMALIZATION.md)
+The positional foundation remains an arithmetic and scalar kernel. The camera
+transport modules are an explicitly separated finite extension of that
+kernel; they add no Green identity, Weyl machinery, primes, zeta functions,
+spectral operators, or analytic continuation. See
+[the foundational-core note](docs/FOUNDATIONAL_CORE.md) for the mathematical
+contract, and [the forced-normalization note](docs/FORCED_NORMALIZATION.md)
 for the structural theorem and its exact scope.
 
 ## Build

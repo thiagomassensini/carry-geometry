@@ -31,6 +31,12 @@ theorem carryAmplitude_nonneg (b k : ℕ) :
   unfold carryAmplitude
   exact Real.rpow_nonneg (by positivity) _
 
+/-- The distinguished amplitude is strictly positive for every positive base. -/
+theorem carryAmplitude_pos (b k : ℕ) (hb : 0 < b) :
+    0 < carryAmplitude b k := by
+  unfold carryAmplitude
+  exact Real.rpow_pos_of_pos (by exact_mod_cast hb) _
+
 /-- The distinguished amplitude is exactly a quadratic root of carry mass. -/
 @[simp] theorem carryAmplitude_sq_eq_carryMass (b k : ℕ) :
     (carryAmplitude b k) ^ 2 = carryMass b k := by
