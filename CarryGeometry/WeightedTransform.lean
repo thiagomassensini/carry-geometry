@@ -130,7 +130,7 @@ theorem weightedEmbeddingTransform_intertwines
   funext j
   have hne : carryAmplitude c l ≠ 0 :=
     (carryAmplitude_pos c l hc).ne'
-  simp [weightedEmbeddingTransform, compressSignal, hne, mul_assoc]
+  simp [weightedEmbeddingTransform, compressSignal, hne]
 
 /-- Weighted restriction intertwines compression in the reverse direction. -/
 theorem weightedEmbeddingRetract_intertwines
@@ -140,7 +140,7 @@ theorem weightedEmbeddingRetract_intertwines
   funext i
   have hne : carryAmplitude b k ≠ 0 :=
     (carryAmplitude_pos b k hb).ne'
-  simp [weightedEmbeddingRetract, compressSignal, restrictSignal, hne, mul_assoc]
+  simp [weightedEmbeddingRetract, compressSignal, restrictSignal, hne]
 
 /-- Reverse-after-forward is exactly the identity on the source signal. -/
 @[simp] theorem weightedEmbeddingRetract_transform
@@ -154,7 +154,7 @@ theorem weightedEmbeddingRetract_intertwines
   have hcne : carryAmplitude c l ≠ 0 :=
     (carryAmplitude_pos c l hc).ne'
   simp [weightedEmbeddingRetract, weightedEmbeddingTransform,
-    compressSignal, restrictSignal, hbne, hcne, mul_assoc]
+    compressSignal, restrictSignal, hbne, hcne]
 
 /--
 Forward-after-reverse is projection onto the embedded image, not the identity
@@ -174,7 +174,7 @@ theorem weightedEmbeddingTransform_retract
   · obtain ⟨i, rfl⟩ := hj
     simp [weightedEmbeddingTransform, weightedEmbeddingRetract,
       imageProjection, compressSignal, restrictSignal,
-      hbne, hcne, mul_assoc]
+      hbne, hcne]
   · have hj' : j ∉ Set.range e := by
       simpa only [Set.mem_range] using hj
     rw [imageProjection_eq_zero_of_not_mem_range e y j hj']
