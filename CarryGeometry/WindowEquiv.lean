@@ -159,7 +159,8 @@ theorem cameraEmbedding_trans
     (cameraEmbedding b c hb hc k l hbc).trans
         (cameraEmbedding c d hc hd l m hcd) =
       cameraEmbedding b d hb hd k m (hbc.trans hcd) := by
-  ext digits
+  apply Function.Embedding.ext
+  intro digits
   apply (digitWindowResidueEquiv d hd m).injective
   apply Fin.ext
   simp [cameraEmbedding]
@@ -170,7 +171,8 @@ theorem cameraEmbedding_eq_matchedCameraEquiv_toEmbedding
     (hcard : placeValue b k = placeValue c l) :
     cameraEmbedding b c hb hc k l hcard.le =
       (matchedCameraEquiv b c hb hc k l hcard).toEmbedding := by
-  ext digits
+  apply Function.Embedding.ext
+  intro digits
   apply (digitWindowResidueEquiv c hc l).injective
   apply Fin.ext
   simp [cameraEmbedding, matchedCameraEquiv]
