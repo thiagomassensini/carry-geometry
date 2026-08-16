@@ -1,0 +1,139 @@
+name: Versioned release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - CITATION.cff
+      - .zenodo.json
+      - docs/releases/**
+      - .github/workflows/release.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: versioned-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Check out exact revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+
+      - name: Resolve and validate release metadata
+        id: metadata
+        run: |
+          python3 <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          cff = Path("CITATION.cff").read_text(encoding="utf-8")
+          version_match = re.search(r"(?m)^version:\s*([^\s#]+)\s*$", cff)
+          date_match = re.search(r"(?m)^date-released:\s*(\d{4}-\d{2}-\d{2})\s*$", cff)
+          if version_match is None or date_match is None:
+              raise SystemExit("CITATION.cff is missing version or date-released")
+
+          version = version_match.group(1)
+          release_date = date_match.group(1)
+          if re.fullmatch(r"\d+\.\d+\.\d+", version) is None:
+              raise SystemExit(f"invalid semantic version: {version}")
+
+          zenodo = json.loads(Path(".zenodo.json").read_text(encoding="utf-8"))
+          if zenodo.get("version") != version:
+              raise SystemExit("CITATION.cff and .zenodo.json versions differ")
+          if zenodo.get("publication_date") != release_date:
+              raise SystemExit("CITATION.cff and .zenodo.json release dates differ")
+
+          tag = f"v{version}"
+          notes = Path("docs") / "releases" / f"{tag}.md"
+          if not notes.is_file():
+              raise SystemExit(f"missing release notes: {notes}")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              print(f"version={version}", file=output)
+              print(f"tag={tag}", file=output)
+              print(f"notes={notes.as_posix()}", file=output)
+          PY
+
+      - name: Detect an existing release
+        id: existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.metadata.outputs.tag }}
+        run: |
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Reject local trust escapes
+        if: steps.existing.outputs.exists != 'true'
+        run: |
+          if rg -n '\b(sorry|admit|axiom|unsafe)\b' \
+              --glob '*.lean' CarryGeometry CarryGeometry.lean; then
+            exit 1
+          fi
+
+      - name: Validate publication metadata and GitHub Markdown
+        if: steps.existing.outputs.exists != 'true'
+        run: |
+          python3 -m json.tool .zenodo.json >/dev/null
+          mapfile -d '' markdown_files < <(find . -path './.git' -prune -o -path './.lake' -prune -o -type f -name '*.md' -print0)
+          if grep -nE '^\\\[|^\\\]$|\\\(|\\\)' "${markdown_files[@]}"; then
+            exit 1
+          fi
+          display_delimiters="$(grep -hc '^\$\$$' "${markdown_files[@]}" | awk '{n += $1} END {print n + 0}')"
+          test "$display_delimiters" -gt 0
+          test "$(( display_delimiters % 2 ))" -eq 0
+
+      - name: Set up Lean and Mathlib cache
+        if: steps.existing.outputs.exists != 'true'
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1.5.0
+        with:
+          use-github-cache: true
+          use-mathlib-cache: true
+
+      - name: Build public root with warnings as errors
+        if: steps.existing.outputs.exists != 'true'
+        run: lake build --wfail CarryGeometry
+
+      - name: Build the explicit axiom audit
+        if: steps.existing.outputs.exists != 'true'
+        run: lake build --wfail CarryGeometry.Audit
+
+      - name: Check the sexagesimal normalization examples
+        if: steps.existing.outputs.exists != 'true'
+        run: lake build --wfail CarryGeometry.Examples.Sexagesimal
+
+      - name: Publish tag and GitHub release
+        if: steps.existing.outputs.exists != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.metadata.outputs.tag }}
+          NOTES: ${{ steps.metadata.outputs.notes }}
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --verify-tag \
+              --title "Carry Geometry $TAG" \
+              --notes-file "$NOTES"
+          else
+            gh release create "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --target "$GITHUB_SHA" \
+              --title "Carry Geometry $TAG" \
+              --notes-file "$NOTES"
+          fi

@@ -8,8 +8,8 @@ authors:
 repository-code: "https://github.com/thiagomassensini/carry-geometry"
 url: "https://github.com/thiagomassensini/carry-geometry"
 license: Apache-2.0
-version: 0.2.0
-date-released: 2026-08-14
+version: 0.2.1
+date-released: 2026-08-16
 abstract: >-
   A Lean 4 formalization of the positional foundation and finite camera
   transport of carry geometry, including unique quotient-remainder
