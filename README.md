@@ -93,7 +93,7 @@ the positional base. No primality assumption is used.
 The evaluation bijection is exposed as
 
 $$
-\operatorname{DigitWindow}(b,k)\simeq\operatorname{Fin}(b^k).
+\mathrm{DigitWindow}(b,k)\simeq\mathrm{Fin}(b^k).
 $$
 
 Consequently, two finite camera windows admit an exact coordinate change when
@@ -124,8 +124,8 @@ inventing an inverse. If $b^k\le c^\ell$, it constructs the canonical
 value-preserving embedding
 
 $$
-\operatorname{DigitWindow}(b,k)\hookrightarrow
-\operatorname{DigitWindow}(c,\ell).
+\mathrm{DigitWindow}(b,k)\hookrightarrow
+\mathrm{DigitWindow}(c,\ell).
 $$
 
 Signals are pushed forward by extension by zero. The compression-weighted
